@@ -1,6 +1,6 @@
 let data = {
     selectedProgramm: 0.1,
-    programms: {
+    programs: {
         base: 0.1,
         it: 0.047,
         gov: 0.067,

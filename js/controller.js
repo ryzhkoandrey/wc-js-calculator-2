@@ -6,5 +6,6 @@ window.onload = function () {
     const getData = Model.getData;
 
     // Init programs
+
     programs(getData);
 }
