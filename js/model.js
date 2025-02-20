@@ -7,9 +7,3 @@ let data = {
         zero: 0.12,
     },
 };
-
-function getData() {
-    return { ...data };
-}
-
-export { getData };
