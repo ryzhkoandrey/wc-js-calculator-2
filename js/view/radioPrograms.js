@@ -1,7 +1,6 @@
 function init(getData) {
-   console.log('Init programs');
-   console.log(getData().programs);
 
+   const radioBtns = document.querySelectorAll('input[name="program"]');
    const { base, it, gov, zero } = getData().programs;
 
    // Set program rates in radio buttons
