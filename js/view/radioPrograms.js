@@ -17,10 +17,6 @@ function init(getData) {
 
    radioBtns.forEach(function (radioBtn) {
       radioBtn.addEventListener('change', function () {
-         console.log(this);
-         console.log(parseFloat(this.value));
-         console.log(this.id);
-
          this.dispatchEvent(new CustomEvent('updateForm', {
             bubbles: true,
             detail: {

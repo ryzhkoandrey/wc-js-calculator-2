@@ -1,5 +1,5 @@
 let data = {
-    selectedProgramm: 0.1,
+    selectedProgram: 0.1,
     programs: {
         base: 0.1,
         it: 0.047,
@@ -12,4 +12,15 @@ function getData() {
     return { ...data };
 }
 
-export { getData };
+function setData(newData) {
+    console.log('New Data:', data);
+
+    data = {
+        ...data,
+        ...newData,
+    };
+
+    console.log('Updated Data:', data);
+}
+
+export { getData, setData };
