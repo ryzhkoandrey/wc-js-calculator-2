@@ -14,6 +14,12 @@ function init(getData) {
    document.querySelector('#it-text').innerText = it * 100 + '%';
    document.querySelector('#gov-text').innerText = gov * 100 + '%';
    document.querySelector('#zero-text').innerText = zero * 100 + '%';
+
+   radioBtns.forEach(function (radioBtn) {
+      radioBtn.addEventListener('change', function () {
+         console.log(this);
+      });
+   });
 }
 
 export default init;
