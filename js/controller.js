@@ -1,6 +1,8 @@
 import * as Model from './model.js';
 import updateResultsView from './view/updateResultsView.js';
+
 import programs from './view/radioPrograms.js';
+import costInput from './view/costInput.js';
 
 window.onload = function () {
 
@@ -8,6 +10,9 @@ window.onload = function () {
 
     // Init programs
     programs(getData);
+
+    // Init Cost input
+    costInput(getData);
 
     document.addEventListener('updateForm', (e) => {
         Model.setData(e.detail);
