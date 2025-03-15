@@ -25,7 +25,15 @@ function getResults() {
 
 function setData(newData) {
     console.log('New data:', data);
-    console.log('New results:', results);
+
+    if (newData.onUpdate === 'inputCost') {
+        // Обновление цены
+        // Если стоимость меньше мин цены
+        if (newData.cost < data.minPrice) newData.cost = data.minPrice;
+
+        // Если стоимость больше макс цены
+        if (newData.cost > data.maxPrice) newData.cost = data.maxPrice;
+    }
 
     data = {
         ...data,
@@ -37,7 +45,6 @@ function setData(newData) {
     }
 
     console.log('Updated data:', data);
-    console.log('Updated results:', results);
 }
 
 export { getData, setData, getResults };
