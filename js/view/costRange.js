@@ -2,7 +2,6 @@ import updateModel from "./../utils/updateModel.js";
 
 function init(getData) {
    const slider = document.querySelector('#slider-cost');
-   const input = document.querySelector('#input-cost');
    const data = getData();
 
    noUiSlider.create(slider, {
@@ -24,6 +23,7 @@ function init(getData) {
    });
 
    slider.noUiSlider.on('slide', () => {
+
       // Get slider value
       let sliderValue = slider.noUiSlider.get();
       sliderValue = sliderValue.split('.')[0];
@@ -34,6 +34,8 @@ function init(getData) {
          onUpdate: 'costSlider',
       });
    });
+
+   return slider;
 }
 
 export default init;
