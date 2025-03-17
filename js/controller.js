@@ -1,59 +1,60 @@
-import * as Model from './model.js';
+import * as Model from "./model.js";
 import updateResultsView from './view/updateResultsView.js';
-import programs from './view/radioPrograms.js';
-import { updateMinPercents } from './view/utils.js';
+import programs from './view/radioPrograms.js'
+import { updateMinPercents } from "./view/utils.js";
 
-import costInput from './view/costInput.js';
+import costInput from './view/costInput.js'
 import costRange from './view/costRange.js'
 
 import paymentInput from './view/paymentInput.js';
 
 window.onload = function () {
+	const getData = Model.getData;
 
-    const getData = Model.getData;
+	// Init programs
+	programs(getData);
 
-    // Init programs
-    programs(getData);
+	// Init Cost input
+	const cleaveCost = costInput(getData);
+	const sliderCost = costRange(getData);
 
-    // Init Cost input
-    const cleaveCost = costInput(getData);
-    const sliderCost = costRange(getData);
-
-    // Init Payment input
+	// Init Payment input
     const cleavePayment = paymentInput(getData);
 
-    document.addEventListener('updateForm', (e) => {
-        Model.setData(e.detail);
+	document.addEventListener('updateForm', (e) => {
+		Model.setData(e.detail);
 
-        const data = Model.getData();
-        const results = Model.getResults();
+		const data = Model.getData();
+		const results = Model.getResults();
 
-        // Update all form view based on model
-        updateFormAndSliders(data);
+		// Update all form view based on model
+		updateFormAndSliders(data);
 
-        // Update results block
-        updateResultsView(results);
-    });
+		// Update results block
+		updateResultsView(results);
+	});
 
-    function updateFormAndSliders(data) {
-        // Update radio btns
-        if (data.onUpdate === 'radioProgram') {
-            updateMinPercents(data);
-        }
+	function updateFormAndSliders(data) {
+		// Update radio btns
+		if (data.onUpdate === 'radioProgram') {
+			updateMinPercents(data);
+		}
 
-        // costInput
-        if (data.onUpdate !== 'inputCost') {
-            cleaveCost.setRawValue(data.cost);
-        }
+		// costInput
+		if (data.onUpdate !== 'inputCost') {
+			console.log('UPDATE INPUT COST');
+			cleaveCost.setRawValue(data.cost);
+		}
 
-        // costSlider
-        if (data.onUpdate !== 'costSlider') {
-            sliderCost.noUiSlider.set(data.cost);
-        }
+		// costSlider
+		if (data.onUpdate !== 'costSlider') {
+			console.log('UPDATE COST SLIDER');
+			sliderCost.noUiSlider.set(data.cost);
+		}
 
-        // paymentInput
+		// paymentInput
         if (data.onUpdate !== 'inputPayment') {
-            cleavePayment.setRawValue(data.payment);
+            cleavePayment.setRawValue(data.payment)
         }
-    }
+	}
 }
