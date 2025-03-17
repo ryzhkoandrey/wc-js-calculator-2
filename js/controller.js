@@ -50,5 +50,10 @@ window.onload = function () {
         if (data.onUpdate !== 'costSlider') {
             sliderCost.noUiSlider.set(data.cost);
         }
+
+        // paymentInput
+        if (data.onUpdate !== 'inputPayment') {
+            cleavePayment.setRawValue(data.payment);
+        }
     }
 }

@@ -44,13 +44,23 @@ function setData(newData) {
         }
     }
 
-    if (newData.onUpdate === 'inputCost') {
+    if (newData.onUpdate === 'inputCost' || newData.onUpdate === 'costSlider') {
         // Обновление цены
         // Если стоимость меньше мин цены
         if (newData.cost < data.minPrice) newData.cost = data.minPrice;
 
         // Если стоимость больше макс цены
         if (newData.cost > data.maxPrice) newData.cost = data.maxPrice;
+
+        // Если новая стоимость меньше первоначалки
+        if (data.payment > data.getMaxPayment()) {
+            data.payment = data.getMaxPayment();
+        }
+
+        // Если сумма первоначалки меньше чем допустимый мин платеж
+        if (data.payment < data.getMinPayment()) {
+            data.payment = data.getMinPayment();
+        }
     }
 
     data = {
