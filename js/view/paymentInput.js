@@ -11,37 +11,37 @@ function init(getData) {
 
    const cleaveInput = new Cleave(input, settings);
 
-   cleaveInput.setRawValue(data.payment);
+   cleaveInput.setRawValue(getData().payment);
 
    input.addEventListener('input', () => {
       const value = +cleaveInput.getRawValue();
 
-      // Проверка на мин и макс цену
-      if (value < data.minPrice || value > data.maxPrice) {
+      // Проверка на мин и макс сумму первого платежа
+      if (value < getData().getMinPayment() || value > getData().getMaxPayment()) {
          input.closest('.param__details').classList.add('param__details--error');
       } else {
          input.closest('.param__details').classList.remove('param__details--error');
       }
 
       // Обновить модель
-      updateModel(input, { cost: value, onUpdate: 'inputCost' });
+      updateModel(input, { payment: value, onUpdate: 'inputPayment' });
    });
 
    input.addEventListener('change', () => {
       const value = +cleaveInput.getRawValue();
 
-      if (value < data.minPrice) {
+      if (value < getData().getMinPayment()) {
          input.closest('.param__details').classList.remove('param__details--error');
-         cleaveInput.setRawValue(data.minPrice);
+         cleaveInput.setRawValue(getData().getMinPayment());
       }
 
-      if (value > data.maxPrice) {
+      if (value > getData().getMaxPayment()) {
          input.closest('.param__details').classList.remove('param__details--error');
-         cleaveInput.setRawValue(data.maxPrice);
+         cleaveInput.setRawValue(getData().getMaxPayment());
       }
 
       // Обновить модель
-      updateModel(input, { cost: +cleaveInput.getRawValue(), onUpdate: 'inputCost' });
+      updateModel(input, { payment: value, onUpdate: 'inputPayment' });
    });
 
    return cleaveInput;

@@ -6,6 +6,8 @@ import { updateMinPercents } from './view/utils.js';
 import costInput from './view/costInput.js';
 import costRange from './view/costRange.js'
 
+import paymentInput from './view/paymentInput.js';
+
 window.onload = function () {
 
     const getData = Model.getData;
@@ -16,6 +18,9 @@ window.onload = function () {
     // Init Cost input
     const cleaveCost = costInput(getData);
     const sliderCost = costRange(getData);
+
+    // Init Payment input
+    const cleavePayment = paymentInput(getData);
 
     document.addEventListener('updateForm', (e) => {
         Model.setData(e.detail);
