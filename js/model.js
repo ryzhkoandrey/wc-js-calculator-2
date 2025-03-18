@@ -56,7 +56,6 @@ function setData(newData) {
       console.log(data.payment);
       console.log(data.getMaxPayment());
       if (data.payment > data.getMaxPayment()) {
-         console.log('here');
          data.payment = data.getMaxPayment();
       }
 
@@ -64,6 +63,10 @@ function setData(newData) {
       if (data.payment < data.getMinPayment()) {
          data.payment = data.getMinPayment();
       }
+   }
+
+   if (newData.onUpdate === 'paymentSlider') {
+      newData.paymentPercents = newData.paymentPercents / 100;
    }
 
    data = {
