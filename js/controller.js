@@ -91,4 +91,32 @@ window.onload = function () {
 			sliderTime.noUiSlider.set(data.time);
 		}
 	}
+
+	// Order Form
+	const openFormBtn = document.querySelector('#openFormBtn');
+	const orderForm = document.querySelector('#orderForm');
+	const submitFormBtn = document.querySelector('#submitFormBtn');
+
+	openFormBtn.addEventListener('click', () => {
+		orderForm.classList.remove('none');
+		openFormBtn.classList.add('none');
+	});
+
+	orderForm.addEventListener('submit', (e) => {
+		e.preventDefault();
+
+		// Собираем данные с формы (перед disable)
+		const formData = new FormData(orderForm);
+		console.log('formData:', formData.get('name'));
+		console.log('formData:', formData.get('email'));
+		console.log('formData:', formData.get('phone'));
+
+		// Disable для кнопки и инпутов
+		submitFormBtn.setAttribute('disabled', true);
+		submitFormBtn.innerText = 'Заявка отправляется...';
+
+		orderForm.querySelectorAll('input').forEach(input => {
+			input.setAttribute('disabled', true);
+		});;
+	});
 }
