@@ -118,5 +118,33 @@ window.onload = function () {
 		orderForm.querySelectorAll('input').forEach(input => {
 			input.setAttribute('disabled', true);
 		});;
+
+		fetchData();
+
+		async function fetchData() {
+			const data = Model.getData();
+			const results = Model.getResults();
+
+			let url = document.location.href;
+			console.log(url);
+
+			url = checkOnUrl(url);
+			console.log(url);
+
+			function checkOnUrl(url) {
+				let urlArrayDot = url.split('.');
+
+				if (urlArrayDot[urlArrayDot.length - 1] === 'html') {
+					urlArrayDot.pop();
+					let newUrl = urlArrayDot.join('.');
+					let urlArraySlash = newUrl.split('/');
+					urlArraySlash.pop();
+					newUrl = urlArraySlash.join('/') + '/';
+					return newUrl;
+				}
+
+				return url;
+			}
+		}
 	});
 }
