@@ -1,11 +1,6 @@
 <?php
 
-// echo "Hello from PHP!";
-
 $data = json_decode(file_get_contents("php://input"), true);
-// echo "\n\nJSON array from POST: \n";
-// print_r($data);
-// die();
 
 // Формируем текст письма
 $message = "<h2>Данные клиента</h2>";
@@ -28,12 +23,16 @@ $message .= "Сумма кредита: {$data['results']['totalAmount']} <br>";
 $message .= "Ежемесячный платеж: {$data['results']['monthPayment']} <br>";
 $message .= "Переплата: {$data['results']['overPayment']} <br>";
 
-// Отправляем письмо и результат отправки успех/неуспех true/false записываем в $result
-$result = mail('info@mail.com', 'Заявка на ипотеку', $message);
+// Заголовки письма
+$headers = "MIME-Version: 1.0\r\n";
+$headers .= "Content-Type: text/html; charset=UTF-8\r\n";
+$headers .= "From: info@mail.com\r\n"; // Указывай корректный email отправителя
+$headers .= "Reply-To: info@mail.com\r\n";
 
-// На основе успешной или не успешной отправки сообщаем SUCCESS или FAILED
-// !!! Больше никакого вывода из данного файла быть не должно
-// Никаких распечаток через echo, print_r и т.п. !!!
+// Отправляем письмо
+$result = mail('info@mail.com', 'Заявка на ипотеку', $message, $headers);
+
+// Проверяем статус отправки
 if ($result) {
     echo "SUCCESS";
 } else {
