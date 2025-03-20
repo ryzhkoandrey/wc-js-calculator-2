@@ -107,9 +107,6 @@ window.onload = function () {
 
 		// Собираем данные с формы (перед disable)
 		const formData = new FormData(orderForm);
-		console.log('formData:', formData.get('name'));
-		console.log('formData:', formData.get('email'));
-		console.log('formData:', formData.get('phone'));
 
 		// Disable для кнопки и инпутов
 		submitFormBtn.setAttribute('disabled', true);
@@ -125,11 +122,7 @@ window.onload = function () {
 			const data = Model.getData();
 			const results = Model.getResults();
 
-			let url = document.location.href;
-			console.log(url);
-
-			url = checkOnUrl(url);
-			console.log(url);
+			let url = checkOnUrl(document.location.href);
 
 			function checkOnUrl(url) {
 				let urlArrayDot = url.split('.');
@@ -145,6 +138,20 @@ window.onload = function () {
 
 				return url;
 			}
+
+			const response = await fetch(url + 'mail.php', {
+				method: 'POST',
+				headers: { 'Content-Type': 'application/json; charset=utf-8' },
+				body: JSON.stringify({
+					form: {
+						name: formData.get('name'),
+						email: formData.get('email'),
+						phone: formData.get('phone'),
+					},
+					data,
+					results,
+				}),
+			});
 		}
 	});
 }
