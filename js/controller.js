@@ -114,7 +114,7 @@ window.onload = function () {
 
 		orderForm.querySelectorAll('input').forEach(input => {
 			input.setAttribute('disabled', true);
-		});;
+		});
 
 		fetchData();
 
@@ -152,6 +152,27 @@ window.onload = function () {
 					results,
 				}),
 			});
+
+			const result = await response.text();
+			console.log(result);
+
+			submitFormBtn.removeAttribute('disabled', true);
+			submitFormBtn.innerText = 'Оформить заявку';
+
+			orderForm.querySelectorAll('input').forEach(input => {
+				input.removeAttribute('disabled', true);
+			});
+
+			// Очищаем поля формы
+			orderForm.reset();
+			orderForm.classList.add('none');
+
+			// На основе ответа от сервера показываем сообщения об Успехе или Ошибке
+			if (result === 'SUCCESS') {
+				document.querySelector('#success').classList.remove('none');
+			} else {
+				document.querySelector('#error').classList.remove('none');
+			}
 		}
 	});
 }
